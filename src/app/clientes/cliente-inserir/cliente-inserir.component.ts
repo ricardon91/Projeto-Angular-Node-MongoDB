@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ClienteService } from "src/app/services/cliente.service";
+import { ClienteService } from "src/services/cliente.service";
 import { Cliente } from "src/models/cliente.model";
 
 

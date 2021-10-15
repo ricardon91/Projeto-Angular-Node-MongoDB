@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ClienteService } from 'src/app/services/cliente.service';
-import { Cliente } from '../../../models/cliente.model';
 import { Subscription, Observable } from 'rxjs';
+import { Cliente } from 'src/models/cliente.model';
+import { ClienteService } from 'src/services/cliente.service';
 
 @Component({
   selector: 'app-cliente-lista',
@@ -17,7 +17,7 @@ export class ClienteListaComponent implements OnInit, OnDestroy {
   constructor(public clienteService: ClienteService) { }
 
   ngOnInit(): void {
-    this.clientes = this.clienteService.getClientes();
+    this.clienteService.getClientes();
     this.clientesSubscription = this.clienteService.getListaDeClientesAtualizadaObservable()
       .subscribe((clientes: Cliente[]) => {
         this.clientes = clientes;
