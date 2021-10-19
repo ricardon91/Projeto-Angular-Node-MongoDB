@@ -16,10 +16,11 @@ const clientes = [
         email: 'jaqueline@email.com'
     }
 ]
-
 app.use(bodyParser.json());
 
-app.use((req, res, next)=>{
+const Cliente = require('./models/cliente');
+
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', "*");
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type,Accept');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
@@ -27,10 +28,14 @@ app.use((req, res, next)=>{
     next();
 });
 
-app.post('/api/clientes', (req, res, next)=>{
-    const cliente = req.body;
+app.post('/api/clientes', (req, res, next) => {
+    const cliente = new Cliente({
+        nome: req.body.nome,
+        fone: req.body.fone,
+        email: req.body.email
+    })
     console.log(cliente);
-    res.status(201).json({mensagem: 'Cliente inserido'})
+    res.status(201).json({ mensagem: 'Cliente inserido' })
 });
 
 app.use('/api/clientes', (req, res, next) => {
