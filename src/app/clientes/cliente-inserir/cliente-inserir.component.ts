@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ClienteService } from "src/services/cliente.service";
-import { Cliente } from "src/models/cliente.model";
-
 
 @Component({
     selector: 'app-cliente-inserir',
@@ -12,13 +10,7 @@ import { Cliente } from "src/models/cliente.model";
 
 export class ClienteInserirComponent {
 
-    constructor(public clienteService: ClienteService) { }
-
-    // @Output() clienteAdicionado = new EventEmitter<Cliente>();
-
-    // nome= '';
-    // fone= '';
-    // email= '';
+    constructor(public clienteService: ClienteService) { }    
 
     adicionarCliente(form: NgForm) {
         if (form.invalid) {
@@ -30,14 +22,7 @@ export class ClienteInserirComponent {
             form.value.fone,
             form.value.email
         );
-        form.resetForm();
-
-        // const cliente: Cliente = {
-        //     nome: form.value.nome,
-        //     fone: form.value.fone,
-        //     email: form.value.email
-        // };
-
-        // this.clienteAdicionado.emit(cliente);
+        debugger
+        form.resetForm();        
     }
 }
