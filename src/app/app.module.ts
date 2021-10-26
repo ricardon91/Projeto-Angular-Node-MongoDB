@@ -16,6 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
 import { ClienteListaComponent } from './clientes/cliente-lista/cliente-lista.component';
 import { ClienteService } from 'src/services/cliente.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ClienteService } from 'src/services/cliente.service';
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     ClienteService

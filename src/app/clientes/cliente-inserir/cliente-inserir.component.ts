@@ -10,19 +10,18 @@ import { ClienteService } from "src/services/cliente.service";
 
 export class ClienteInserirComponent {
 
-    constructor(public clienteService: ClienteService) { }    
+    constructor(public clienteService: ClienteService) { }
 
     adicionarCliente(form: NgForm) {
         if (form.invalid) {
             return;
         }
-
         this.clienteService.adicionarCliente(
             form.value.nome,
             form.value.fone,
             form.value.email
         );
         debugger
-        form.resetForm();        
+        form.resetForm();
     }
 }
