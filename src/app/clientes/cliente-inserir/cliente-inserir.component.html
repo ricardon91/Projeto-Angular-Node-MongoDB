@@ -3,21 +3,21 @@
         <h2>Inserir cliente</h2>
 
         <mat-form-field>
-            <input type="text" required minlength="4" matInput placeholder="Nome" name="nome" ngModel #nome="ngModel">
+            <input type="text" required minlength="4" matInput placeholder="Nome" name="nome" [ngModel]="cliente?.nome" #nome="ngModel">
             <mat-error *ngIf="nome.invalid">Digite um nome válido</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input type="text" required matInput placeholder="Fone" name="fone" ngModel #fone="ngModel">
+            <input type="text" required matInput placeholder="Fone" name="fone" [ngModel]="cliente?.fone" #fone="ngModel">
             <mat-error *ngIf="fone.invalid">Digite um telefone válido</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input type="email" required matInput placeholder="E-mail" name="email" ngModel #email="ngModel">
+            <input type="email" required matInput placeholder="E-mail" name="email" [ngModel]="cliente?.email" #email="ngModel">
             <mat-error *ngIf="email.invalid">Digite um nome válido</mat-error>
         </mat-form-field>
 
-        <button color="primary" mat-raised-button>Inserir</button>
+        <button color="accent" mat-raised-button>Salvar</button>
 
         <!-- <button color="primary" mat-raised-button (click)="adicionarCliente()" class="btn btn-primary">Inserir</button> -->
     </form>
