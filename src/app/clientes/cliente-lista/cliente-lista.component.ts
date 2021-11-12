@@ -11,15 +11,18 @@ import { ClienteService } from 'src/services/cliente.service';
 export class ClienteListaComponent implements OnInit, OnDestroy {
   clientes: Cliente[] = [];
   private clientesSubscription: Subscription;
+  public estaCarregando = false;
 
   // @Input() clientes: Cliente[] = [];
 
   constructor(public clienteService: ClienteService) { }
 
   ngOnInit(): void {
+    this.estaCarregando = true;
     this.clienteService.getClientes();
     this.clientesSubscription = this.clienteService.getListaDeClientesAtualizadaObservable()
       .subscribe((clientes: Cliente[]) => {
+        this.estaCarregando = false;
         this.clientes = clientes;
       });
   }
