@@ -1,9 +1,11 @@
+const path = require ('path');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const clienteRoutes = require ('./rotas/clientes');
 app.use(bodyParser.json());
+app.use('/image', express.static(path.join("backend/image")));
 
 mongoose.connect('mongodb+srv://ricardo:141626@cluster0.ka2ga.mongodb.net/app-cliente?retryWrites=true&w=majority')
     .then(() => {

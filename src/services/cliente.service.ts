@@ -18,12 +18,13 @@ export class ClienteService {
     getClientes(): void {
         this.httpClient.get<{ mensagem: string, clientes: any }>('http://localhost:3000/api/clientes')
             .pipe(map((dados) => {
-                return dados.clientes.map((cliente: { _id: any; nome: any; fone: any; email: any; }) => {
+                return dados.clientes.map((cliente: { _id: any; nome: any; fone: any; email: any; imagemURL: any }) => {
                     return {
                         id: cliente._id,
                         nome: cliente.nome,
                         fone: cliente.fone,
-                        email: cliente.email
+                        email: cliente.email,
+                        imagemURL: cliente.imagemURL
                     }
                 })
             }))
@@ -41,16 +42,28 @@ export class ClienteService {
     }
 
 
-    adicionarCliente(nome: string, fone: string, email: string) {
-        const cliente: Cliente = {
-            id: '',
-            nome: nome,
-            fone: fone,
-            email: email
-        };
-        this.httpClient.post<{ mensagem: string, id: string }>('http://localhost:3000/api/clientes', cliente)
+    adicionarCliente(nome: string, fone: string, email: string, imagem: File) {
+        // const cliente: Cliente = {
+        //     id: '',
+        //     nome: nome,
+        //     fone: fone,
+        //     email: email
+        // };
+        const dadosCliente = new FormData();
+        dadosCliente.append("nome", nome);
+        dadosCliente.append('fone', fone);
+        dadosCliente.append('email', email);
+        dadosCliente.append('imagem', imagem);
+        this.httpClient.post<{ mensagem: string, cliente: Cliente}>('http://localhost:3000/api/clientes', dadosCliente)
             .subscribe((dados) => {
-                cliente.id = dados.id
+                // cliente.id = dados.id
+                const cliente: Cliente = {
+                    id: dados.cliente.id,
+                    nome: nome,
+                    fone: fone,
+                    email: email,
+                    imagemURL: dados.cliente.imagemURL
+                };
                 console.log(dados.mensagem);
                 this.clientes.push(cliente);
                 this.listaClienteAtualizada.next([...this.clientes]);
@@ -59,7 +72,7 @@ export class ClienteService {
     }
 
     atualizarCliente(id: string, nome: string, fone: string, email: string) {
-        const cliente: Cliente = { id, nome, fone, email };
+        const cliente: Cliente = { id, nome, fone, email, imagemURL: null};
         this.httpClient.put(`http://localhost:3000/api/clientes/${id}`, cliente)
             .subscribe((res => {
                 const copia = [...this.clientes];
